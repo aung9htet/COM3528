@@ -26,3 +26,7 @@ class MovementPublisher(object):
 movement = MovementPublisher()
 while not rospy.is_shutdown():
     movement.set_move_cmd(linear=0.1, angular=0.4)
+<<<<<<< HEAD
+=======
+    movement.publish()
+>>>>>>> 2557d55d37e7c3c317aa5c4b013191d592552509
