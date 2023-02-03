@@ -18,7 +18,6 @@ class OdomSubscriber(object):
         self.subscriber = rospy.Subscriber(topic_base_name + "/sensors/odom", Odometry, self.callback)
 
     def callback(self, data):
-        print(data)
         orientation = data.pose.pose.orientation
         self.x = data.pose.pose.position.x
         self.y = data.pose.pose.position.y
@@ -28,5 +27,5 @@ class OdomSubscriber(object):
 odom = OdomSubscriber()
 while not rospy.is_shutdown():
     toPrint = "position x: " + str(odom.x) + "\nposition y: " + str(odom.y) + "\ntheta: " + str(odom.yaw)
-    #print(toPrint)
+    print(toPrint)
     rospy.sleep(0.5)    # to slow down the printing

@@ -17,15 +17,12 @@ class MovementPublisher(object):
 
     # linear is to move straight and angular is to turn
     def set_move_cmd(self, linear = 0.0, angular = 0.0):
-        self.vel_cmd = TwistStamped()
-        self.vel_cmd.twist.linear.x = linear
-        self.vel_cmd.twist.angular.z = angular
-
-    def publish(self):
-        self.vel_pub.publish(self.vel_cmd)
+        vel_cmd = TwistStamped()
+        vel_cmd.twist.linear.x = linear
+        vel_cmd.twist.angular.z = angular
+        self.vel_pub.publish(vel_cmd)
 
 # makes the miro move in circles
 movement = MovementPublisher()
 while not rospy.is_shutdown():
     movement.set_move_cmd(linear=0.1, angular=0.2)
-    movement.publish()
