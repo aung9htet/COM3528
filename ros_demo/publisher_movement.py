@@ -27,5 +27,5 @@ class MovementPublisher(object):
 # makes the miro move in circles
 movement = MovementPublisher()
 while not rospy.is_shutdown():
-    movement.set_move_cmd(linear=0.1, angular=0.2)
+    movement.set_move_cmd(linear=0.1, angular=0.4)
     movement.publish()
