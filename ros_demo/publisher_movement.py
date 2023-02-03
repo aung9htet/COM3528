@@ -24,7 +24,8 @@ class MovementPublisher(object):
     def publish(self):
         self.vel_pub.publish(self.vel_cmd)
 
+# makes the miro move in circles
 movement = MovementPublisher()
 while not rospy.is_shutdown():
-    movement.set_move_cmd(linear=1.0)
+    movement.set_move_cmd(linear=0.1, angular=0.2)
     movement.publish()
