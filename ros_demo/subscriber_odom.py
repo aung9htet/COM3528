@@ -11,9 +11,9 @@ class OdomSubscriber(object):
     """
     def __init__(self):
         rospy.init_node("odom_subscriber")
-        self.x = None
-        self.y = None
-        self.yaw = None
+        self.x = 0
+        self.y = 0
+        self.yaw = 0
         topic_base_name = "/" + os.getenv("MIRO_ROBOT_NAME")
         self.subscriber = rospy.Subscriber(topic_base_name + "/sensors/odom", Odometry, self.callback)
 
