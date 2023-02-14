@@ -2,7 +2,7 @@
 import os
 import rospy    # ROS Python interface
 from nav_msgs.msg import Odometry   # ROS odometry subsciriber
-from tf.transformations import euler_from_quaternion
+from tf.transformations import euler_from_quaternion, quaternion_from_euler
 
 class OdomSubscriber(object):
     
@@ -24,8 +24,18 @@ class OdomSubscriber(object):
         (_, _, self.yaw) = euler_from_quaternion([orientation.x,
             orientation.y, orientation.z, orientation.w],'sxyz')
 
+    def reset(self):
+        self.x = self.y = pose_z = angular_x = angular_y = angular_z = 0
+        publisher = rospy.Publisher(topic_base_name + "/sensors/odom", Odometry, queue_size=0)
+        reset_values = Odometry()
+        publisher.publish(reset_values)
+
+
 odom = OdomSubscriber()
 while not rospy.is_shutdown():
     toPrint = "position x: " + str(odom.x) + "\nposition y: " + str(odom.y) + "\ntheta: " + str(odom.yaw)
     print(toPrint)
-    rospy.sleep(0.5)    # to slow down the printing
+    rospy.sleep(1)
+    toPrint = "position x: " + str(odom.x) + "\nposition y: " + str(odom.y) + "\ntheta: " + str(odom.yaw)
+    print(toPrint)
+    odom.reset()
