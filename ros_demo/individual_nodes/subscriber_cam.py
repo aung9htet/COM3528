@@ -13,7 +13,9 @@ class CamSubscriber(object):
     """
     def __init__(self, default = True):
         rospy.init_node("cam_subscriber")
+        # cv bridge is used for converting ros img data to data that can be used by open cv
         self.bridge = CvBridge()
+        # part of the topic name that either changes the MiRo to use either the left or right camera
         if default == True:
             cam_topic = "/sensors/camr"
         else:

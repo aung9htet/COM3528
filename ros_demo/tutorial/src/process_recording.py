@@ -3,7 +3,7 @@ import os
 import rospy            # ROS Python interface
 from geometry_msgs.msg import TwistStamped
 
-class MovementPublisher(object):
+class StreamPublisher(object):
     
     """
         The following code will move the MiRo
@@ -11,6 +11,7 @@ class MovementPublisher(object):
     def __init__(self):
         rospy.init_node("movement_publisher")
         topic_base_name = "/" + os.getenv("MIRO_ROBOT_NAME")
+        self.subscriber = 
         self.vel_pub = rospy.Publisher(
             topic_base_name + "/control/cmd_vel", TwistStamped, queue_size=0
         )

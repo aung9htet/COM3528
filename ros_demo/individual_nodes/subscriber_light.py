@@ -17,6 +17,7 @@ class LightSubscriber(object):
         topic_base_name = "/" + os.getenv("MIRO_ROBOT_NAME")
         self.subscriber = rospy.Subscriber(topic_base_name + "/sensors/light", Float32MultiArray, self.callback)
 
+    # callback function used to update the object instances for this class
     def callback(self, data):
         self.front = data.data[0]
         self.right = data.data[1]
@@ -25,6 +26,7 @@ class LightSubscriber(object):
 
 light = LightSubscriber()
 while not rospy.is_shutdown():
+    # run the code to check the data from the subscriber
     toPrint = "Front: " + str(light.front) + "\nRight: " + str(light.right) + "\nLeft: " + str(light.left) + "\nBack: " + str(light.back)
     print(toPrint)
     rospy.sleep(0.5)    # to slow down the printing

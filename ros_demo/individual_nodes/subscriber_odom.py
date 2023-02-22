@@ -17,6 +17,7 @@ class OdomSubscriber(object):
         topic_base_name = "/" + os.getenv("MIRO_ROBOT_NAME")
         self.subscriber = rospy.Subscriber(topic_base_name + "/sensors/odom", Odometry, self.callback)
 
+    # callback function is first used to translate the subcriber data into euler coordinates which may then be used to update object instances 
     def callback(self, data):
         orientation = data.pose.pose.orientation
         self.x = data.pose.pose.position.x
@@ -33,6 +34,7 @@ class OdomSubscriber(object):
 
 odom = OdomSubscriber()
 while not rospy.is_shutdown():
+    # run the code to check the data from the subscriber
     toPrint = "position x: " + str(odom.x) + "\nposition y: " + str(odom.y) + "\ntheta: " + str(odom.yaw)
     print(toPrint)
     rospy.sleep(1)

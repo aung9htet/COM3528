@@ -17,6 +17,7 @@ class SonarSubscriber(object):
         topic_base_name = "/" + os.getenv("MIRO_ROBOT_NAME")
         self.subscriber = rospy.Subscriber(topic_base_name + "/sensors/sonar", Range, self.callback)
 
+    # callback function used to update the object instances for this class
     def callback(self, data):
         self.fov = data.field_of_view
         self.min_range = data.min_range

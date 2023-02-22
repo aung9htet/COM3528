@@ -18,6 +18,7 @@ class IllumPublisher(object):
 
     # set color
     def set_illumination(self, red = 0, green = 0, blue = 0):
+        # changing the rgb format into android format to be published in MiRo message
         color_change = UInt32MultiArray()
         color_detail = (int(red), int(green), int(blue))
         color = '0xFF%02x%02x%02x'%color_detail

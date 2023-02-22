@@ -15,11 +15,13 @@ class JointPublisher(object):
     def __init__(self):
         rospy.init_node("joint_publisher")
         self.position = None
-        self.start = time.time()
+        self.start = time.time()    # time to be used for blink sample
         topic_base_name = "/" + os.getenv("MIRO_ROBOT_NAME")
+        # kinematic joint publisher
         self.kinematic_pub = rospy.Publisher(
             topic_base_name + "/control/kinematic_joints", JointState, queue_size=0
         )
+        # cosmetic joint publisher
         self.cosmetic_pub = rospy.Publisher(
             topic_base_name + "/control/cosmetic_joints", Float32MultiArray, queue_size=0
         )
@@ -39,6 +41,7 @@ class JointPublisher(object):
     # a sample on how the miro can blink
     def blink_sample(self):
         current_time = time.time()
+        # set angle will have oscillatory behavior for blinking
         set_angle = np.sin(current_time - self.start)
         self.set_move_cosmetic(left_eye = set_angle, right_eye = set_angle)
         rospy.sleep(0.05)
