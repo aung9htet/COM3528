@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!-- How to start a simulation with multiple MiRos using a launch file -->
+<launch>
+
+    <!-- MiRo 1 -->
+    <env name="MIRO_ROBOT_NAME" value="miro1"/>
+    <node name="miro_1" pkg="connecting_miros" type="move_miro.py" />
+
+    <!-- MiRo 2 -->
+    <env name="MIRO_ROBOT_NAME" value="miro2"/>
+    <node name="miro_2" pkg="connecting_miros" type="move_miro.py" />
+
+    <!-- Repeat for MiRo 3, MiRo 4 and etc-->
+
+</launch>
